@@ -1,0 +1,1025 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<title>PEG for GraphViz DOT</title>
+<style>
+<!--
+td {
+font-family: monospace;
+padding-right: .5em;
+}
+-->
+</style>
+
+</head>
+
+<body lang=EN-US link=blue vlink=purple>
+
+<h1>PEG for GraphViz DOT</h1>
+
+<table border=0 cellspacing=0 cellpadding=0 style='border-collapse:collapse'>
+ <tr>
+  <th nowrap></th>
+  <th nowrap valign=top>
+  <p>&quot;Abstract Grammar&quot; (year 2020) from<br>
+  http://www.graphviz.org/doc/info/lang.html</p>
+  </th>
+  <th nowrap></th>
+  <th nowrap valign=top>
+  <p>Notation converted to PEG.</p>
+  </th>
+  <th nowrap></th>
+  <th nowrap valign=top>
+  <p>Debugged.</p>
+  </th>
+  <th nowrap></th>
+  <th nowrap valign=top>
+  <p>Simplification.<br>
+  Recursion converted to simple repetition <br>
+  operators.</p>
+  </th>
+  <th nowrap></th>
+  <th nowrap valign=top>
+  <p>Completion.<br>
+  Spacing.</p>
+  </th>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>file &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>_ graph+</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>graph:</p>
+  </td>
+  <td nowrap>
+  <p>[ <b>strict</b> ] (<b>graph</b> | <b>digraph</b>) [ ID ] '{' stmt_list '}'</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>graph &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'strict'? ('graph' / 'digraph') ID? '{' stmt_list '}'</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>graph &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'strict'? ('graph' / 'digraph') ID? '{' stmt_list '}'</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>graph &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'strict'? ('graph' / 'digraph') ID? '{' stmt_list '}'</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>graph &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('strict' _)? ('graph' / 'digraph') _ ID? '{' _ stmt_list '}' _</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>stmt_list:</p>
+  </td>
+  <td nowrap>
+  <p>[ stmt [ ';' ] stmt_list ]</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>stmt_list &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>(stmt ';'? stmt_list)?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>stmt_list &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>(stmt ';'? stmt_list)?</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>stmt_list &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>(stmt ';'?)*</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>stmt_list &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>(stmt (';' _)?)*</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>stmt:</p>
+  </td>
+  <td nowrap>
+  <p>node_stmt</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>node_stmt</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>stmt &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>attr_stmt</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>attr_stmt</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>attr_stmt</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap>
+  <p>| edge_stmt</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ edge_stmt</p>
+  </td>
+  <td nowrap style='background:yellow;'></td>
+  <td nowrap style='background:yellow;'>
+  <p>/ edge_stmt</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ edge_stmt</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ edge_stmt</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap>
+  <p>| attr_stmt</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ attr_stmt</p>
+  </td>
+  <td nowrap style='background:yellow;'></td>
+  <td nowrap style='background:yellow;'>
+  <p>/ subgraph</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ subgraph</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ subgraph</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap>
+  <p>| ID '=' ID</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ ID '=' ID</p>
+  </td>
+  <td nowrap style='background:yellow;'></td>
+  <td nowrap style='background:yellow;'>
+  <p>/ ID '=' ID</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ ID '=' ID</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ ID '=' _ ID</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap>
+  <p>| subgraph</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ subgraph</p>
+  </td>
+  <td nowrap style='background:yellow;'></td>
+  <td nowrap style='background:yellow;'>
+  <p>/ node_stmt</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ node_stmt</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ node_stmt</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr_stmt:</p>
+  </td>
+  <td nowrap>
+  <p>(<b>graph</b> | <b>node</b> | <b>edge</b>) attr_list</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('graph' / 'node' / 'edge') attr_list</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('graph' / 'node' / 'edge') attr_list</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('graph' / 'node' / 'edge') attr_list</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('graph' / 'node' / 'edge') _ attr_list</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr_list:</p>
+  </td>
+  <td nowrap>
+  <p>'[' [ a_list ] ']' [ attr_list ]</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr_list &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'[' a_list? ']' attr_list?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr_list &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'[' a_list? ']' attr_list?</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>attr_list &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>('[' attr* ']')+</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr_list &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('[' _ attr* ']' _)+</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>a_list:</p>
+  </td>
+  <td nowrap>
+  <p>ID '=' ID [ (';' | ',') ] [ a_list ]</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>a_list &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>ID '=' ID [;,]? a_list?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>a_list &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>ID '=' ID [;,]? a_list?</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'><s>a_list &lt;-</s></p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p><s>(ID '=' ID [;,]?)+</s></p>
+  </td>
+  <td nowrap></td>
+  <td nowrap></td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>attr &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>ID '=' ID [;,]?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>attr &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>ID '=' _ ID ([;,] _)?</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>edge_stmt:</p>
+  </td>
+  <td nowrap>
+  <p>(node_id | subgraph) edgeRHS [ attr_list ]</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>edge_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>(node_id / subgraph) edgeRHS attr_list?</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>edge_stmt &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>(subgraph / node_id) edgeRHS attr_list?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>edge_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>(subgraph / node_id) edgeRHS attr_list?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>edge_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>(subgraph / node_id) edgeRHS attr_list?</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>edgeRHS:</p>
+  </td>
+  <td nowrap>
+  <p>edgeop (node_id | subgraph) [ edgeRHS ]</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>edgeRHS &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>edgeop (node_id / subgraph) edgeRHS?</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>edgeRHS &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>edgeop (subgraph / node_id) edgeRHS?</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>edgeRHS &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>(edgeop (subgraph / node_id))+</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>edgeRHS &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>(edgeop (subgraph / node_id))+</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>node_stmt:</p>
+  </td>
+  <td nowrap>
+  <p>node_id [ attr_list ]</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>node_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>node_id attr_list?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>node_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>node_id attr_list?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>node_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>node_id attr_list?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>node_stmt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>node_id attr_list?</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>node_id:</p>
+  </td>
+  <td nowrap>
+  <p>ID [ port ]</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>node_id &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>ID port?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>node_id &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>ID port?</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>node_id &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>ID port? port?</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>node_id &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>ID port? port?</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>port:</p>
+  </td>
+  <td nowrap>
+  <p>':' ID [ ':' compass_pt ]</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>port &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>':' ID (':' compass_pt)?</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>port &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>':' ID (':' ID)?</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'>port &lt;-</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p>':' ID</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>port &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>':' _ ID</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap>
+  <p>| ':' compass_pt</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ ':' compass_pt</p>
+  </td>
+  <td nowrap style='background:yellow;'></td>
+  <td nowrap style='background:yellow;'></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>subgraph:</p>
+  </td>
+  <td nowrap>
+  <p>[ <b>subgraph</b> [ ID ] ] '{' stmt_list '}'</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>subgraph &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('subgraph' ID?)? '{' stmt_list '}'</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>subgraph &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('subgraph' ID?)? '{' stmt_list '}'</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>subgraph &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('subgraph' ID?)? '{' stmt_list '}'</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>subgraph &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('subgraph' _ ID?)? '{' _ stmt_list '}' _</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap>
+  <p align=right style='text-align:right'>compass_pt:</p>
+  </td>
+  <td nowrap>
+  <p>(<b>n</b> | <b>ne</b> | <b>e</b> | <b>se</b> | <b>s</b> | <b>sw</b> | <b>w</b> | <b>nw</b> | <b>c</b> | <b>_</b>)</p>
+  </td>
+  <td nowrap>
+  <p align=right style='text-align:right'>compass_pt &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'n' / 'ne' / 'e' / 'se' / 's' / 'sw' / 'w' / 'nw' / 'c' / '_'</p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p align=right style='text-align:right'><s>compass_pt &lt;-</s></p>
+  </td>
+  <td nowrap style='background:yellow;'>
+  <p><s>'ne' / 'nw' / 'se' / 'sw'/ 's' / 'w' / 'n' / 'e' / 'c' / '_'</s></p>
+  </td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>edgeop &lt;-</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>edgeop &lt;-</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>edgeop &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>('--' / '-&gt;') _</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>ID &lt;-</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>ID &lt;-</p>
+  </td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>ID &lt;-</p>
+  </td>
+  <td nowrap>
+  <p> HTML</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ QUOTED</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ NUMERAL</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ STRING</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>HTML &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'&lt;' (![&lt;&gt;] . / HTML)* '&gt;' _</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>QUOTED &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'&quot;' ESCAPED* '&quot;' _ ('+' _ '&quot;' ESCAPED* '&quot;' _)*</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>ESCAPED &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>ESC_QUOTE</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ ESC_EOL</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ '\\' .</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ !'&quot;' .</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>ESC_QUOTE &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'\\&quot;'</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>ESC_EOL &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'\\' EOL</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>NUMERAL &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'-'? ([0-9]+ ('.' [0-9]*)? / '.' [0-9]+) _</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>STRING &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>[A-Z_a-z\u0080-\uFFFF] [0-9A-Z_a-z\u0080-\uFFFF]* _</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>_ &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>([ \t] / EOL / COMMENT)*</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>COMMENT &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>COMMENT_HASH</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ COMMENT_SLASH</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p>/ COMMENT_BLOCK</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>COMMENT_HASH &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'#' (!EOL .)*</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>COMMENT_SLASH &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'//' (!EOL .)*</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>COMMENT_BLOCK &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'/*' (!'*/' .)* '*/'</p>
+  </td>
+ </tr>
+ <tr>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap></td>
+  <td nowrap>
+  <p align=right style='text-align:right'>EOL &lt;-</p>
+  </td>
+  <td nowrap>
+  <p>'\r\n' / '\n' / '\r'</p>
+  </td>
+ </tr>
+</table>
+
+<h2>Notes</h2>
+
+<p>Main DOT specification:</p>
+
+<p>The keywords <b>node</b>, <b>edge</b>, <b>graph</b>, <b>digraph</b>, <b>subgraph</b>,
+and <b>strict</b> <s>are case-independent</s>. <i>At least in GraphViz
+2.38 and 2.46 keywords are case sensitive! So attribute statement with
+&quot;Node&quot; keyword will create a new node (will be interpreted as node
+statement)!</i></p>
+
+<p>As another aid for readability, dot allows double-quoted strings
+to span multiple physical lines using the standard C convention of a backslash
+immediately preceding a newline character. (<i>In GraphViz 2.38 this is true,
+but in 2.46 newline characters are ignored also if  not escaped! Seems like a bug
+because it breaks HTML strings (that preserve them) and quoted strings
+equivalence.</i>)</p>
+
+<p>In quoted strings in DOT, the <s>only</s> escaped character
+is double-quote (&quot;). That is, in quoted strings, the dyad \&quot; is
+converted to &quot;; <s>all other characters are left unchanged</s>. (<i>As
+stated above - backslash before newline character removes them both.</i>) In
+particular, \\ remains \\. Layout engines may apply additional escape
+sequences.<br>
+<a href="http://www.graphviz.org/doc/info/lang.html">http://www.graphviz.org/doc/info/lang.html</a><br>
+<a href="https://gitlab.com/graphviz/graphviz/-/blob/master/doc/info/lang.html">https://gitlab.com/graphviz/graphviz/-/blob/master/doc/info/lang.html</a><br>
+<a href="https://gitlab.com/graphviz/graphviz/-/blob/master/doc/infosrc/grammar">https://gitlab.com/graphviz/graphviz/-/blob/master/doc/infosrc/grammar</a></p>
+
+<hr>
+
+<p>Note that it is legal to have a portname the same as one of
+the compass points. In this case, this reference will be resolved to the port.</p>
+
+<p><i>Contrary to specification compass points type is ID!</i><br>
+<a href="http://www.graphviz.org/doc/info/attrs.html#k:portPos">http://www.graphviz.org/doc/info/attrs.html#k:portPos</a><br>
+graphviz-2.46.0/lib/common/shapes.c compassPort()</p>
+
+<hr>
+
+<p>Additional escape sequences are different for quoted strings
+and HTML strings:<br>
+<a href="http://www.graphviz.org/doc/info/attrs.html#k:escString">http://www.graphviz.org/doc/info/attrs.html#k:escString</a><br>
+In HTML strings substitution is performed after interpretation (so e.g. &amp;#x5C;N
+will be substituted as \N (node name) would be, but the content of substitution
+will be left not interpreted). In quoted strings substitution is the first
+thing that is done (so a node name with &amp;gt; will be displayed with &gt;). Record
+type node shapes add more complications:<br>
+<a href="http://www.graphviz.org/doc/info/shapes.html#record">http://www.graphviz.org/doc/info/shapes.html#record</a></p>
+
+<hr>
+
+<p>GraphViz may not understand Unicode BOM.</p>
+
+<hr>
+
+<p>Note how in PEG explicit spacing declaration tends to occur after
+literals (terminals).</p>
+
+</body>
+
+</html>
