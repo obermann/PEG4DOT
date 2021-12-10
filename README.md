@@ -10,23 +10,17 @@ An example of using dot.pegjs (compiled as dot.js) can be found in https://githu
 
 ## Resources
 
-[Ford, Bryan. (2004). Parsing Expression Grammars: A Recognition-Based Syntactic Foundation. ACM SIGPLAN Notices. 39. 111-122. 10.1145/964001.964011.]
-(https://pdos.csail.mit.edu/~baford/packrat/popl04/)
+[Ford, Bryan. (2004). Parsing Expression Grammars: A Recognition-Based Syntactic Foundation. ACM SIGPLAN Notices. 39. 111-122. 10.1145/964001.964011.](https://pdos.csail.mit.edu/~baford/packrat/popl04/)
 
-[PEG.js Grammar Syntax and Semantics]
-(https://github.com/pegjs/pegjs/tree/master/docs/grammar)
+[PEG.js Grammar Syntax and Semantics](https://github.com/pegjs/pegjs/tree/master/docs/grammar)
 
-[PEG.js online parser generator for JavaScript]
-(https://pegjs.org/online)
+[PEG.js online parser generator for JavaScript](https://pegjs.org/online)
 
-[PEGSH - A Free Online PEG Syntax Highlighter]
-(http://phrogz.net/js/pegsh/)
+[PEGSH - A Free Online PEG Syntax Highlighter](http://phrogz.net/js/pegsh/)
 
-[DOT in Wikipedia]
-(https://en.wikipedia.org/wiki/DOT_(graph_description_language))
+[DOT in Wikipedia](https://en.wikipedia.org/wiki/DOT_(graph_description_language))
 
-[Graphviz abstract grammar defining the DOT language]
-(http://www.graphviz.org/doc/info/lang.html)
+[Graphviz abstract grammar defining the DOT language](http://www.graphviz.org/doc/info/lang.html)
 
 ## Prior Art
 
